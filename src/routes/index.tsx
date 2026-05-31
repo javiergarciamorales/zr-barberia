@@ -116,10 +116,12 @@ function Index() {
             </a>
           </div>
           <a
-            href="tel:+34632519926"
+            href="https://booksy.com/es-es/169727_peluqueria-barberia-zr_barberia_53184_alcala-de-henares"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-brand-black text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-brand-gold transition-all"
           >
-            Reservar Cita
+            Reservar en Booksy
           </a>
         </div>
       </nav>
@@ -148,19 +150,25 @@ function Index() {
               En Peluquería ZR combinamos la técnica clásica con un ambiente moderno y pulcro en el
               corazón de Alcalá de Henares. Zouhir te recibe con la atención que mereces.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <div className="flex items-center gap-3 px-4 py-3 bg-white border border-brand-black/5 rounded-sm">
-                <div className="size-2 rounded-full bg-green-500 animate-pulse" aria-hidden />
-                <span className="text-xs font-medium uppercase">
-                  Abierto · Cierra 14:00 · Vuelve a abrir 17:00
-                </span>
-              </div>
+            <div className="flex flex-wrap gap-4 items-center">
+              <a
+                href="https://booksy.com/es-es/169727_peluqueria-barberia-zr_barberia_53184_alcala-de-henares"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-4 text-xs font-bold uppercase tracking-widest bg-brand-gold text-brand-black hover:bg-brand-black hover:text-white transition-all"
+              >
+                Reservar Online →
+              </a>
               <a
                 href="tel:+34632519926"
-                className="px-5 py-3 text-xs font-bold uppercase tracking-widest border border-brand-black hover:bg-brand-black hover:text-white transition-all"
+                className="px-6 py-4 text-xs font-bold uppercase tracking-widest border border-brand-black hover:bg-brand-black hover:text-white transition-all"
               >
-                632 51 99 26
+                Llamar · 632 51 99 26
               </a>
+              <div className="flex items-center gap-3 px-4 py-3 bg-white border border-brand-black/5 rounded-sm">
+                <div className="size-2 rounded-full bg-green-500 animate-pulse" aria-hidden />
+                <span className="text-xs font-medium uppercase">Abierto ahora</span>
+              </div>
             </div>
           </div>
           <div className="lg:col-span-5">
@@ -369,12 +377,22 @@ function Index() {
                 Tu próximo corte, sin esperas.
               </p>
             </div>
-            <a
-              href="tel:+34632519926"
-              className="block text-center bg-brand-gold text-brand-black py-4 font-bold uppercase tracking-widest text-sm hover:bg-white transition-colors"
-            >
-              Llamar ahora
-            </a>
+            <div className="space-y-3">
+              <a
+                href="https://booksy.com/es-es/169727_peluqueria-barberia-zr_barberia_53184_alcala-de-henares"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-center bg-brand-gold text-brand-black py-4 font-bold uppercase tracking-widest text-sm hover:bg-white transition-colors"
+              >
+                Reservar en Booksy →
+              </a>
+              <a
+                href="tel:+34632519926"
+                className="block text-center border border-white/20 text-white py-4 font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-brand-black transition-colors"
+              >
+                O llamar
+              </a>
+            </div>
           </div>
         </div>
 
