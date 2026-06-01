@@ -268,7 +268,9 @@ function Index() {
               nuestros clientes
             </h2>
             <div className="text-right">
-              <p className="text-brand-gold font-bold">5,0 ★ · 72 reseñas en Google</p>
+              <p className="text-brand-gold font-bold">
+                {formatRating(rating)} ★ · {userRatingCount} reseñas en Google
+              </p>
               <p className="text-xs font-medium uppercase tracking-widest text-brand-black/40">
                 Alcalá de Henares, Madrid
               </p>
@@ -276,20 +278,32 @@ function Index() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {reviews.map((r) => (
+            {reviews.map((r, i) => (
               <div
-                key={r.name}
+                key={`${r.authorName}-${i}`}
                 className="p-8 border border-brand-black/5 bg-brand-surface flex flex-col justify-between"
               >
                 <p className="text-sm italic leading-relaxed mb-6">"{r.text}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="size-10 rounded-full bg-brand-black/5 grid place-items-center text-[10px] font-bold">
-                    {r.initials}
-                  </div>
+                  {r.authorPhoto ? (
+                    <img
+                      src={r.authorPhoto}
+                      alt={r.authorName}
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                      className="size-10 rounded-full object-cover bg-brand-black/5"
+                    />
+                  ) : (
+                    <div className="size-10 rounded-full bg-brand-black/5 grid place-items-center text-[10px] font-bold">
+                      {getInitials(r.authorName)}
+                    </div>
+                  )}
                   <div>
-                    <p className="text-xs font-bold uppercase">{r.name}</p>
+                    <p className="text-xs font-bold uppercase">{r.authorName}</p>
                     <p className="text-[10px] text-brand-black/40 uppercase tracking-tighter">
-                      {r.meta}
+                      {r.relativeTime} · {r.rating}/5
                     </p>
                   </div>
                 </div>
