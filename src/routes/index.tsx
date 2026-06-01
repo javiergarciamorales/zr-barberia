@@ -83,13 +83,10 @@ const BOOKSY_URL =
   "https://booksy.com/es-es/169727_peluqueria-barberia-zr_barberia_53184_alcala-de-henares";
 
 function openBooksy(e: React.MouseEvent<HTMLAnchorElement>) {
-  // Forzar apertura en el navegador real (escapa de iframes/WebViews embebidos)
+  // Forzar apertura en pestaña nueva sin navegar la actual
   e.preventDefault();
-  const w = window.open(BOOKSY_URL, "_blank", "noopener,noreferrer");
-  if (!w) {
-    // Fallback si el navegador bloquea window.open
-    window.top!.location.href = BOOKSY_URL;
-  }
+  e.stopPropagation();
+  window.open(BOOKSY_URL, "_blank", "noopener,noreferrer");
 }
 
 function Index() {
