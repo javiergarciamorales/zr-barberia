@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "ZR barberia" },
+      { name: "description", content: "Zr Style Studio is a website for a hair salon and barber shop." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "ZR barberia" },
+      { property: "og:description", content: "Zr Style Studio is a website for a hair salon and barber shop." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "ZR barberia" },
+      { name: "twitter:description", content: "Zr Style Studio is a website for a hair salon and barber shop." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3b21a9f3-a1c5-4743-a5d6-52c730460274/id-preview-bcf59902--f595b8a8-2feb-46a9-8d03-4755e94493d7.lovable.app-1780297000805.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3b21a9f3-a1c5-4743-a5d6-52c730460274/id-preview-bcf59902--f595b8a8-2feb-46a9-8d03-4755e94493d7.lovable.app-1780297000805.png" },
     ],
     links: [
       {
