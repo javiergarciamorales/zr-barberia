@@ -125,7 +125,7 @@ function Index() {
                 <span>★</span>
               </div>
               <span className="text-xs font-bold tracking-widest uppercase opacity-60">
-                5.0 (72 Reseñas en Google)
+                {formatRating(rating)} ({userRatingCount} Reseñas en Google)
               </span>
             </div>
             <h1 className="text-6xl md:text-8xl font-display font-bold uppercase leading-[0.9] mb-8">
