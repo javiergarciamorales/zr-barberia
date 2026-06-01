@@ -291,7 +291,7 @@ function Index() {
             {reviews.map((r, i) => (
               <div
                 key={`${r.authorName}-${i}`}
-                className="p-8 border border-brand-black/5 bg-brand-surface flex flex-col justify-between"
+                className="p-8 border border-brand-black/5 bg-brand-surface flex flex-col justify-between w-full md:w-[calc(50%-1rem)] lg:w-[360px] max-w-md"
               >
                 <p className="text-sm italic leading-relaxed mb-6">"{r.text}"</p>
                 <div className="flex items-center gap-3">
