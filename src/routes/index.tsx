@@ -1,5 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import barbershopInterior from "@/assets/barbershop-interior.jpg";
+import { getPlaceData } from "@/lib/place-reviews.functions";
+
+const placeQueryOptions = queryOptions({
+  queryKey: ["place", "zr-barberia"],
+  queryFn: () => getPlaceData(),
+  staleTime: 1000 * 60 * 60, // 1h client cache
+});
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -54,48 +62,26 @@ export const Route = createFileRoute("/")({
     ],
   }),
   component: Index,
+  loader: ({ context }) => context.queryClient.ensureQueryData(placeQueryOptions),
 });
 
-const reviews = [
-  {
-    text: "Es muy majo el peluquero y sobre todo te corta el pelo como quieres. El local es muy elegante y usa un desinfectante en tu piel cuando acaba. Volveré.",
-    name: "Pablo García",
-    meta: "Local Guide · 5/5",
-    initials: "PG",
-  },
-  {
-    text: "Mi marido le visitó y le ha encantado, muy amable y profesional. Es muy detallista. El local está muy limpio y de ambiente agradable. Económico.",
-    name: "Mcponsita",
-    meta: "Local Guide · 5/5",
-    initials: "MP",
-  },
-  {
-    text: "Zouhir gran peluquero con mucha experiencia, muy detallista, muy buen precio y un local muy limpio, repetiré seguro.",
-    name: "Pablo Acevedo",
-    meta: "Cliente habitual · 5/5",
-    initials: "PA",
-  },
-  {
-    text: "Me escucha, hace un corte impecable y siempre salgo contento con el resultado. ¡Volveré seguro, 100% recomendable!",
-    name: "Kevin Duque",
-    meta: "Cliente · 5/5",
-    initials: "KD",
-  },
-  {
-    text: "He probado muchos peluqueros en Alcalá y me quedo aquí, el corte fue tal y como lo pedí y el local está muy limpio. Precio muy bueno por la calidad.",
-    name: "Juan Fernández",
-    meta: "Cliente · 5/5",
-    initials: "JF",
-  },
-  {
-    text: "La peluquería es TOP, saben cortar el pelo perfecto, bien acabado, limpieza, trato de 10 y a un precio muy competente. Recomendable 100%.",
-    name: "Carlos AD",
-    meta: "Local Guide · 5/5",
-    initials: "CA",
-  },
-];
+function getInitials(name: string) {
+  return name
+    .split(/\s+/)
+    .map((p) => p[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
+
+function formatRating(r: number) {
+  return r.toFixed(1).replace(".", ",");
+}
 
 function Index() {
+  const { data } = useSuspenseQuery(placeQueryOptions);
+  const { rating, userRatingCount, reviews } = data;
   return (
     <div className="min-h-screen bg-brand-surface font-sans text-brand-black selection:bg-brand-gold/30">
       {/* Navigation */}
@@ -139,7 +125,7 @@ function Index() {
                 <span>★</span>
               </div>
               <span className="text-xs font-bold tracking-widest uppercase opacity-60">
-                5.0 (72 Reseñas en Google)
+                {formatRating(rating)} ({userRatingCount} Reseñas en Google)
               </span>
             </div>
             <h1 className="text-6xl md:text-8xl font-display font-bold uppercase leading-[0.9] mb-8">
@@ -282,7 +268,9 @@ function Index() {
               nuestros clientes
             </h2>
             <div className="text-right">
-              <p className="text-brand-gold font-bold">5,0 ★ · 72 reseñas en Google</p>
+              <p className="text-brand-gold font-bold">
+                {formatRating(rating)} ★ · {userRatingCount} reseñas en Google
+              </p>
               <p className="text-xs font-medium uppercase tracking-widest text-brand-black/40">
                 Alcalá de Henares, Madrid
               </p>
@@ -290,20 +278,32 @@ function Index() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {reviews.map((r) => (
+            {reviews.map((r, i) => (
               <div
-                key={r.name}
+                key={`${r.authorName}-${i}`}
                 className="p-8 border border-brand-black/5 bg-brand-surface flex flex-col justify-between"
               >
                 <p className="text-sm italic leading-relaxed mb-6">"{r.text}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="size-10 rounded-full bg-brand-black/5 grid place-items-center text-[10px] font-bold">
-                    {r.initials}
-                  </div>
+                  {r.authorPhoto ? (
+                    <img
+                      src={r.authorPhoto}
+                      alt={r.authorName}
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                      className="size-10 rounded-full object-cover bg-brand-black/5"
+                    />
+                  ) : (
+                    <div className="size-10 rounded-full bg-brand-black/5 grid place-items-center text-[10px] font-bold">
+                      {getInitials(r.authorName)}
+                    </div>
+                  )}
                   <div>
-                    <p className="text-xs font-bold uppercase">{r.name}</p>
+                    <p className="text-xs font-bold uppercase">{r.authorName}</p>
                     <p className="text-[10px] text-brand-black/40 uppercase tracking-tighter">
-                      {r.meta}
+                      {r.relativeTime} · {r.rating}/5
                     </p>
                   </div>
                 </div>
