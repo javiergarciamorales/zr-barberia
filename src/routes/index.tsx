@@ -79,6 +79,19 @@ function formatRating(r: number) {
   return r.toFixed(1).replace(".", ",");
 }
 
+const BOOKSY_URL =
+  "https://booksy.com/es-es/169727_peluqueria-barberia-zr_barberia_53184_alcala-de-henares";
+
+function openBooksy(e: React.MouseEvent<HTMLAnchorElement>) {
+  // Forzar apertura en el navegador real (escapa de iframes/WebViews embebidos)
+  e.preventDefault();
+  const w = window.open(BOOKSY_URL, "_blank", "noopener,noreferrer");
+  if (!w) {
+    // Fallback si el navegador bloquea window.open
+    window.top!.location.href = BOOKSY_URL;
+  }
+}
+
 function Index() {
   const { data } = useSuspenseQuery(placeQueryOptions);
   const { rating, userRatingCount, reviews } = data;
@@ -102,7 +115,7 @@ function Index() {
             </a>
           </div>
           <a
-            href="https://booksy.com/es-es/169727_peluqueria-barberia-zr_barberia_53184_alcala-de-henares"
+            href={BOOKSY_URL} onClick={openBooksy}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-brand-black text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-brand-gold transition-all"
@@ -138,7 +151,7 @@ function Index() {
             </p>
             <div className="flex flex-wrap gap-4 items-center">
               <a
-                href="https://booksy.com/es-es/169727_peluqueria-barberia-zr_barberia_53184_alcala-de-henares"
+                href={BOOKSY_URL} onClick={openBooksy}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-4 text-xs font-bold uppercase tracking-widest bg-brand-gold text-brand-black hover:bg-brand-black hover:text-white transition-all"
@@ -379,7 +392,7 @@ function Index() {
             </div>
             <div className="space-y-3">
               <a
-                href="https://booksy.com/es-es/169727_peluqueria-barberia-zr_barberia_53184_alcala-de-henares"
+                href={BOOKSY_URL} onClick={openBooksy}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-center bg-brand-gold text-brand-black py-4 font-bold uppercase tracking-widest text-sm hover:bg-white transition-colors"
