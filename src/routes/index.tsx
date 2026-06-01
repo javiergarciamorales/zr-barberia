@@ -1,5 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import barbershopInterior from "@/assets/barbershop-interior.jpg";
+import { getPlaceData } from "@/lib/place-reviews.functions";
+
+const placeQueryOptions = queryOptions({
+  queryKey: ["place", "zr-barberia"],
+  queryFn: () => getPlaceData(),
+  staleTime: 1000 * 60 * 60, // 1h client cache
+});
 
 export const Route = createFileRoute("/")({
   head: () => ({
